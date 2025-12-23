@@ -76,7 +76,32 @@ Capture snapshots on each debugger pause to locate the user-land function respon
 
 
 ## Getting Started
-### Install
+### 🚀 Desktop Builds (Recommended)
+Pre-built desktop applications are available for:
+
+- macOS (.dmg)
+- Windows (.exe)
+- Linux (.AppImage)
+
+You can download the latest builds from the GitHub Releases page:  
+
+👉 [https://github.com/fcavallarin/wirebrowser/releases](https://github.com/fcavallarin/wirebrowser/releases)  
+
+#### macOS — first launch note
+
+The macOS build is not signed yet.
+On first launch, macOS may block the app due to quarantine restrictions.
+
+To remove the quarantine flag, run:
+
+```bash
+xattr -dr com.apple.quarantine Wirebrowser.app
+```
+Then launch the app normally.  
+Signing and notarization will be added in a future release.
+
+### 🛠 Build from Source
+If you prefer to run Wirebrowser from source:
 
 ```bash
 git clone https://github.com/fcavallarin/wirebrowser.git
@@ -90,7 +115,9 @@ npm run build
 npm run wirebrowser
 ```
 
-### 🐧 Linux - Sandbox issue with Electron
+### 🐧 Linux Notes 
+
+#### Sandbox issue with Electron
 On some Linux distributions, Electron may fail to start due to process sandboxing restrictions, showing errors such as:
 
 ```
@@ -103,6 +130,17 @@ The most common solution is to disable AppArmor restrictions:
 ```
 sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
 ```
+
+#### Chrome extension location
+When running Wirebrowser on Linux via the AppImage, Chromium security policies require unpacked extensions to be stored in a visible (non-hidden) directory.
+
+For this reason, the Wirebrowser Chrome extension is installed in: 
+
+`~/wirebrowser/chrome-extension`  
+
+This behavior is intentional and required for Chromium to load the extension correctly.
+
+⚠️ Do not move, rename, or hide this directory, otherwise the extension will fail to load.
 
 
 ## ⚙️ Additional Capabilities
